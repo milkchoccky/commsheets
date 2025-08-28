@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choccky's Commission Sheets</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="icon" href="pfp.png" />
+  <style>
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      background: url('./bg.png') center center / cover no-repeat fixed;
+      color: #eaeaea;
+    }
+    .card {
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 20px rgba(255,255,255,0.05);
+    }
+    .zoom-img {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .zoom-img:hover {
+      transform: scale(1.05);
+    }
+    /* Стили модального окна */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 8px;
+    }
+    .modal button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #a1120d;
+      color: white;
+      font-weight: bold;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .modal button:hover {
+      background: #800c0a;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+<audio id="background-music" loop autoplay>
+  <source src="music.mp3" type="audio/mpeg" />
+  Error
+</audio>
+
+<div class="absolute top-4 left-4 z-50 cursor-pointer text-sm text-white bg-black/50 px-3 py-1 rounded-md hover:bg-black/10 transition" onclick="toggleVolume()" id="volume-toggle">
+  Music: ON
+</div>
+
+<div class="flex items-center justify-center min-h-screen p-4">
+  <div class="card w-full max-w-4xl rounded-lg p-8">
+
+    <h1 class="text-center text-2xl mb-6 tracking-widest" style="color: #a1120d;">
+      Commission Sheets
+    </h1>
+
+    <!-- Сетка для картинок -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-black/80 flex items-center justify-center h-64 rounded-md overflow-hidden">
+        <img src="img1.png" alt="Artwork 1" class="max-h-full max-w-full object-contain zoom-img" onclick="openModal(this.src)">
+      </div>
+      <div class="bg-black/80 flex items-center justify-center h-64 rounded-md overflow-hidden">
+        <img src="img2.png" alt="Artwork 2" class="max-h-full max-w-full object-contain zoom-img" onclick="openModal(this.src)">
+      </div>
+      <div class="bg-black/80 flex items-center justify-center h-64 rounded-md overflow-hidden">
+        <img src="img3.png" alt="Artwork 3" class="max-h-full max-w-full object-contain zoom-img" onclick="openModal(this.src)">
+      </div>
+      <div class="bg-black/80 flex items-center justify-center h-64 rounded-md overflow-hidden">
+        <img src="img4.png" alt="Artwork 4" class="max-h-full max-w-full object-contain zoom-img" onclick="openModal(this.src)">
+      </div>
+    </div>
+
+    <!-- Кнопка назад -->
+    <div class="mt-8 text-xs text-center opacity-80 tracking-widest">
+<p>//
+      <a href="index.html" 
+         class="px-6 py-3 rounded-lg font-semibold text-white inline-block" 
+         style="background-color: #a1120d;">
+        ⬅ Back
+      </a>
+ //</p>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="imageModal" class="modal">
+  <button onclick="closeModal()">✖ Close</button>
+  <img id="modalImage" src="" alt="Expanded artwork">
+</div>
+
+<script>
+  const music = document.getElementById('background-music');
+  const volumeToggle = document.getElementById('volume-toggle');
+  let musicPlaying = true;
+
+  function toggleVolume() {
+    if (music.paused) {
+      music.play();
+      musicPlaying = true;
+      volumeToggle.textContent = 'Music: ON';
+    } else {
+      music.pause();
+      musicPlaying = false;
+      volumeToggle.textContent = 'Music: OFF';
+    }
+  }
+
+
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+
+  function openModal(src) {
+    modal.style.display = 'flex';
+    modalImg.src = src;
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
